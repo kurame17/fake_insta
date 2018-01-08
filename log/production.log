@@ -1,0 +1,742 @@
+D, [2018-01-08T01:48:42.044430 #10803] DEBUG -- :   [1m[36m (5.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+D, [2018-01-08T01:48:42.044669 #10803] DEBUG -- :   [1m[35m (0.1ms)[0m  select sqlite_version(*)
+D, [2018-01-08T01:48:42.049836 #10803] DEBUG -- :   [1m[36m (4.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+D, [2018-01-08T01:48:42.050551 #10803] DEBUG -- :   [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+I, [2018-01-08T01:48:42.053556 #10803]  INFO -- : Migrating to CreatePosts (20180102051253)
+D, [2018-01-08T01:48:42.053885 #10803] DEBUG -- :   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+D, [2018-01-08T01:48:42.055097 #10803] DEBUG -- :   [1m[35m (0.2ms)[0m  CREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "content" text, "postimage" varchar, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+D, [2018-01-08T01:48:42.058464 #10803] DEBUG -- :   [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180102051253"]]
+D, [2018-01-08T01:48:42.063760 #10803] DEBUG -- :   [1m[35m (5.1ms)[0m  commit transaction
+I, [2018-01-08T01:48:42.063810 #10803]  INFO -- : Migrating to CreateBlogs (20180102064541)
+D, [2018-01-08T01:48:42.064130 #10803] DEBUG -- :   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+D, [2018-01-08T01:48:42.064813 #10803] DEBUG -- :   [1m[35m (0.2ms)[0m  CREATE TABLE "blogs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "content" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+D, [2018-01-08T01:48:42.065589 #10803] DEBUG -- :   [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180102064541"]]
+D, [2018-01-08T01:48:42.070280 #10803] DEBUG -- :   [1m[35m (4.6ms)[0m  commit transaction
+I, [2018-01-08T01:48:42.070338 #10803]  INFO -- : Migrating to DeviseCreateUsers (20180104012645)
+D, [2018-01-08T01:48:42.070718 #10803] DEBUG -- :   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+D, [2018-01-08T01:48:42.071652 #10803] DEBUG -- :   [1m[35m (0.2ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar DEFAULT '' NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+D, [2018-01-08T01:48:42.072418 #10803] DEBUG -- :   [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+D, [2018-01-08T01:48:42.073102 #10803] DEBUG -- :   [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+D, [2018-01-08T01:48:42.073471 #10803] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+D, [2018-01-08T01:48:42.078220 #10803] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20180104012645"]]
+D, [2018-01-08T01:48:42.083425 #10803] DEBUG -- :   [1m[36m (5.0ms)[0m  [1mcommit transaction[0m
+I, [2018-01-08T01:48:42.083474 #10803]  INFO -- : Migrating to AddAdminToUsers (20180104041313)
+D, [2018-01-08T01:48:42.083749 #10803] DEBUG -- :   [1m[35m (0.1ms)[0m  begin transaction
+D, [2018-01-08T01:48:42.084475 #10803] DEBUG -- :   [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "admin" boolean DEFAULT 'f'[0m
+D, [2018-01-08T01:48:42.085200 #10803] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20180104041313"]]
+D, [2018-01-08T01:48:42.088799 #10803] DEBUG -- :   [1m[36m (3.4ms)[0m  [1mcommit transaction[0m
+I, [2018-01-08T02:42:51.710905 #1572]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 02:42:51 +0000
+I, [2018-01-08T02:42:51.728344 #1572]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T02:42:51.776603 #1572] DEBUG -- :   [1m[36mPost Load (3.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+I, [2018-01-08T02:42:51.780427 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (8.7ms)
+I, [2018-01-08T02:42:51.783547 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.7ms)
+I, [2018-01-08T02:42:51.784856 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.4ms)
+I, [2018-01-08T02:42:51.787521 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.2ms)
+I, [2018-01-08T02:42:51.787801 #1572]  INFO -- : Completed 200 OK in 59ms (Views: 29.1ms | ActiveRecord: 3.4ms)
+I, [2018-01-08T02:42:51.789552 #1572]  INFO -- : Started GET "/" for 203.246.196.46 at 2018-01-08 02:42:51 +0000
+I, [2018-01-08T02:42:51.790501 #1572]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T02:42:51.798044 #1572] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T02:42:51.798150 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.5ms)
+I, [2018-01-08T02:42:51.798857 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T02:42:51.799028 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T02:42:51.799166 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T02:42:51.805768 #1572]  INFO -- : Completed 200 OK in 15ms (Views: 8.2ms | ActiveRecord: 0.1ms)
+I, [2018-01-08T02:43:03.385504 #1572]  INFO -- : Started GET "/posts/new" for 66.249.82.83 at 2018-01-08 02:43:03 +0000
+I, [2018-01-08T02:43:03.386625 #1572]  INFO -- : Processing by PostsController#new as HTML
+I, [2018-01-08T02:43:03.387437 #1572]  INFO -- : Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+I, [2018-01-08T02:43:03.830906 #1572]  INFO -- : Started GET "/users/sign_in" for 66.249.82.85 at 2018-01-08 02:43:03 +0000
+I, [2018-01-08T02:43:03.832489 #1572]  INFO -- : Processing by Users::SessionsController#new as HTML
+I, [2018-01-08T02:43:03.884012 #1572]  INFO -- :   Rendered devise/sessions/new.html.erb within layouts/application (32.5ms)
+I, [2018-01-08T02:43:03.884220 #1572]  INFO -- : Completed 401 Unauthorized in 52ms (ActiveRecord: 0.4ms)
+F, [2018-01-08T02:43:03.885112 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f2577600>:0x00005611f257c268>
+Did you mean?  simple_format):
+    1: <h2>Log in</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="form-inputs">
+    5:     <%= f.input :email, required: false, autofocus: true %>
+    6:     <%= f.input :password, required: false %>
+  app/views/devise/sessions/new.html.erb:3:in `_app_views_devise_sessions_new_html_erb___2568838304434631693_47317540180000'
+
+
+I, [2018-01-08T02:43:04.910752 #1572]  INFO -- : Started GET "/users/sign_in" for 203.246.196.46 at 2018-01-08 02:43:04 +0000
+I, [2018-01-08T02:43:04.911610 #1572]  INFO -- : Processing by Users::SessionsController#new as HTML
+I, [2018-01-08T02:43:04.950178 #1572]  INFO -- :   Rendered devise/sessions/new.html.erb within layouts/application (37.3ms)
+I, [2018-01-08T02:43:04.950386 #1572]  INFO -- : Completed 401 Unauthorized in 39ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T02:43:04.951246 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f2577600>:0x00005611f29cfd10>
+Did you mean?  simple_format):
+    1: <h2>Log in</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="form-inputs">
+    5:     <%= f.input :email, required: false, autofocus: true %>
+    6:     <%= f.input :password, required: false %>
+  app/views/devise/sessions/new.html.erb:3:in `_app_views_devise_sessions_new_html_erb___2568838304434631693_47317540180000'
+
+
+I, [2018-01-08T02:43:12.869934 #1572]  INFO -- : Started GET "/users/sign_up" for 66.249.82.83 at 2018-01-08 02:43:12 +0000
+I, [2018-01-08T02:43:12.871408 #1572]  INFO -- : Processing by Devise::RegistrationsController#new as HTML
+I, [2018-01-08T02:43:12.909376 #1572]  INFO -- :   Rendered devise/registrations/new.html.erb within layouts/application (32.5ms)
+I, [2018-01-08T02:43:12.909557 #1572]  INFO -- : Completed 401 Unauthorized in 38ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T02:43:12.910355 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f505f9f8>:0x00007ff820ee6fb8>
+Did you mean?  simple_format):
+    1: <h2>Sign up</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    4:   <%= f.error_notification %>
+    5: 
+    6:   <div class="form-inputs">
+  app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb___2845059921147057099_70351840554300'
+
+
+I, [2018-01-08T02:43:13.676630 #1572]  INFO -- : Started GET "/users/sign_up" for 203.246.196.46 at 2018-01-08 02:43:13 +0000
+I, [2018-01-08T02:43:13.677419 #1572]  INFO -- : Processing by Devise::RegistrationsController#new as HTML
+I, [2018-01-08T02:43:13.710616 #1572]  INFO -- :   Rendered devise/registrations/new.html.erb within layouts/application (32.1ms)
+I, [2018-01-08T02:43:13.710797 #1572]  INFO -- : Completed 401 Unauthorized in 33ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T02:43:13.711636 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f505f9f8>:0x00007ff8214e8650>
+Did you mean?  simple_format):
+    1: <h2>Sign up</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    4:   <%= f.error_notification %>
+    5: 
+    6:   <div class="form-inputs">
+  app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb___2845059921147057099_70351840554300'
+
+
+I, [2018-01-08T02:43:22.401503 #1572]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 02:43:22 +0000
+I, [2018-01-08T02:43:22.402226 #1572]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T02:43:22.407171 #1572] DEBUG -- :   [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+I, [2018-01-08T02:43:22.407328 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.7ms)
+I, [2018-01-08T02:43:22.407985 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T02:43:22.408195 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T02:43:22.408334 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T02:43:22.408506 #1572]  INFO -- : Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+I, [2018-01-08T02:43:25.402207 #1572]  INFO -- : Started GET "/users/sign_up" for 66.249.82.85 at 2018-01-08 02:43:25 +0000
+I, [2018-01-08T02:43:25.403055 #1572]  INFO -- : Processing by Devise::RegistrationsController#new as HTML
+I, [2018-01-08T02:43:25.436973 #1572]  INFO -- :   Rendered devise/registrations/new.html.erb within layouts/application (32.8ms)
+I, [2018-01-08T02:43:25.437126 #1572]  INFO -- : Completed 401 Unauthorized in 34ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T02:43:25.437943 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f505f9f8>:0x00005611f4e414c8>
+Did you mean?  simple_format):
+    1: <h2>Sign up</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    4:   <%= f.error_notification %>
+    5: 
+    6:   <div class="form-inputs">
+  app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb___2845059921147057099_70351840554300'
+
+
+I, [2018-01-08T02:43:25.783294 #1572]  INFO -- : Started GET "/users/sign_up" for 203.246.196.46 at 2018-01-08 02:43:25 +0000
+I, [2018-01-08T02:43:25.784007 #1572]  INFO -- : Processing by Devise::RegistrationsController#new as HTML
+I, [2018-01-08T02:43:25.822120 #1572]  INFO -- :   Rendered devise/registrations/new.html.erb within layouts/application (37.1ms)
+I, [2018-01-08T02:43:25.822290 #1572]  INFO -- : Completed 401 Unauthorized in 38ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T02:43:25.823099 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f505f9f8>:0x00005611f4d2ad28>
+Did you mean?  simple_format):
+    1: <h2>Sign up</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    4:   <%= f.error_notification %>
+    5: 
+    6:   <div class="form-inputs">
+  app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb___2845059921147057099_70351840554300'
+
+
+I, [2018-01-08T02:43:27.846128 #1572]  INFO -- : Started GET "/" for 66.249.82.81 at 2018-01-08 02:43:27 +0000
+I, [2018-01-08T02:43:27.846831 #1572]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T02:43:27.853501 #1572] DEBUG -- :   [1m[35mPost Load (2.3ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T02:43:27.853621 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (2.8ms)
+I, [2018-01-08T02:43:27.854206 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T02:43:27.854386 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T02:43:27.854506 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T02:43:27.854657 #1572]  INFO -- : Completed 200 OK in 8ms (Views: 1.7ms | ActiveRecord: 2.3ms)
+I, [2018-01-08T02:44:01.925945 #1572]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 02:44:01 +0000
+I, [2018-01-08T02:44:01.926659 #1572]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T02:44:01.931048 #1572] DEBUG -- :   [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+I, [2018-01-08T02:44:01.931163 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T02:44:01.931780 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T02:44:01.931938 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T02:44:01.932052 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T02:44:01.932201 #1572]  INFO -- : Completed 200 OK in 5ms (Views: 1.7ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T02:44:04.479963 #1572]  INFO -- : Started GET "/?q=" for 66.249.82.83 at 2018-01-08 02:44:04 +0000
+I, [2018-01-08T02:44:04.480733 #1572]  INFO -- : Processing by PostsController#index as HTML
+I, [2018-01-08T02:44:04.480777 #1572]  INFO -- :   Parameters: {"q"=>""}
+D, [2018-01-08T02:44:04.485103 #1572] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T02:44:04.485216 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T02:44:04.485797 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T02:44:04.485958 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T02:44:04.486072 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T02:44:04.486228 #1572]  INFO -- : Completed 200 OK in 5ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+I, [2018-01-08T02:44:06.755104 #1572]  INFO -- : Started GET "/?q=%E3%84%B9%E3%84%B9" for 66.249.82.81 at 2018-01-08 02:44:06 +0000
+I, [2018-01-08T02:44:06.755913 #1572]  INFO -- : Processing by PostsController#index as HTML
+I, [2018-01-08T02:44:06.755959 #1572]  INFO -- :   Parameters: {"q"=>"ㄹㄹ"}
+D, [2018-01-08T02:44:06.760443 #1572] DEBUG -- :   [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%ㄹㄹ%')[0m
+I, [2018-01-08T02:44:06.760582 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T02:44:06.761166 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T02:44:06.761319 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T02:44:06.761432 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T02:44:06.761578 #1572]  INFO -- : Completed 200 OK in 6ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+I, [2018-01-08T02:44:08.307244 #1572]  INFO -- : Started GET "/?q=%E3%84%B9%E3%84%B9" for 66.249.82.85 at 2018-01-08 02:44:08 +0000
+I, [2018-01-08T02:44:08.308043 #1572]  INFO -- : Processing by PostsController#index as HTML
+I, [2018-01-08T02:44:08.308089 #1572]  INFO -- :   Parameters: {"q"=>"ㄹㄹ"}
+D, [2018-01-08T02:44:08.312553 #1572] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%ㄹㄹ%')
+I, [2018-01-08T02:44:08.312693 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T02:44:08.313277 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T02:44:08.313434 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T02:44:08.313548 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T02:44:08.313718 #1572]  INFO -- : Completed 200 OK in 6ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+I, [2018-01-08T02:44:09.130737 #1572]  INFO -- : Started GET "/" for 66.249.82.83 at 2018-01-08 02:44:09 +0000
+I, [2018-01-08T02:44:09.131556 #1572]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T02:44:09.135983 #1572] DEBUG -- :   [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+I, [2018-01-08T02:44:09.136099 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T02:44:09.136637 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T02:44:09.136823 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T02:44:09.136941 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T02:44:09.137104 #1572]  INFO -- : Completed 200 OK in 5ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T02:44:10.169531 #1572]  INFO -- : Started GET "/" for 66.249.82.83 at 2018-01-08 02:44:10 +0000
+I, [2018-01-08T02:44:10.170278 #1572]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T02:44:10.174703 #1572] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T02:44:10.174818 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T02:44:10.175428 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T02:44:10.175597 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T02:44:10.175716 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T02:44:10.175880 #1572]  INFO -- : Completed 200 OK in 6ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+I, [2018-01-08T02:44:11.388471 #1572]  INFO -- : Started GET "/posts/new" for 66.249.82.83 at 2018-01-08 02:44:11 +0000
+I, [2018-01-08T02:44:11.389291 #1572]  INFO -- : Processing by PostsController#new as HTML
+I, [2018-01-08T02:44:11.389919 #1572]  INFO -- : Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+I, [2018-01-08T02:44:11.759420 #1572]  INFO -- : Started GET "/users/sign_in" for 66.249.82.81 at 2018-01-08 02:44:11 +0000
+I, [2018-01-08T02:44:11.760188 #1572]  INFO -- : Processing by Users::SessionsController#new as HTML
+I, [2018-01-08T02:44:11.797937 #1572]  INFO -- :   Rendered devise/sessions/new.html.erb within layouts/application (36.6ms)
+I, [2018-01-08T02:44:11.798153 #1572]  INFO -- : Completed 401 Unauthorized in 38ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T02:44:11.799235 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f2577600>:0x00005611f275b4d0>
+Did you mean?  simple_format):
+    1: <h2>Log in</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="form-inputs">
+    5:     <%= f.input :email, required: false, autofocus: true %>
+    6:     <%= f.input :password, required: false %>
+  app/views/devise/sessions/new.html.erb:3:in `_app_views_devise_sessions_new_html_erb___2568838304434631693_47317540180000'
+
+
+I, [2018-01-08T02:44:12.389079 #1572]  INFO -- : Started GET "/users/sign_in" for 203.246.196.46 at 2018-01-08 02:44:12 +0000
+I, [2018-01-08T02:44:12.389835 #1572]  INFO -- : Processing by Users::SessionsController#new as HTML
+I, [2018-01-08T02:44:12.424373 #1572]  INFO -- :   Rendered devise/sessions/new.html.erb within layouts/application (33.3ms)
+I, [2018-01-08T02:44:12.424514 #1572]  INFO -- : Completed 401 Unauthorized in 35ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T02:44:12.425319 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f2577600>:0x00005611f508d9e8>
+Did you mean?  simple_format):
+    1: <h2>Log in</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="form-inputs">
+    5:     <%= f.input :email, required: false, autofocus: true %>
+    6:     <%= f.input :password, required: false %>
+  app/views/devise/sessions/new.html.erb:3:in `_app_views_devise_sessions_new_html_erb___2568838304434631693_47317540180000'
+
+
+I, [2018-01-08T02:44:37.052795 #1572]  INFO -- : Started GET "/new" for 66.249.82.85 at 2018-01-08 02:44:37 +0000
+F, [2018-01-08T02:44:37.053465 #1572] FATAL -- : 
+ActionController::RoutingError (No route matches [GET] "/new"):
+  actionpack (4.2.9) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.9) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.9) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.9) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.9) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.9) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.9) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.9) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.9) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.8) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.8) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.9) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.8) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.9) lib/rails/engine.rb:518:in `call'
+  railties (4.2.9) lib/rails/application.rb:165:in `call'
+  /usr/lib/ruby/vendor_ruby/phusion_passenger/rack/thread_handler_extension.rb:97:in `process_request'
+  /usr/lib/ruby/vendor_ruby/phusion_passenger/request_handler/thread_handler.rb:152:in `accept_and_process_next_request'
+  /usr/lib/ruby/vendor_ruby/phusion_passenger/request_handler/thread_handler.rb:113:in `main_loop'
+  /usr/lib/ruby/vendor_ruby/phusion_passenger/request_handler.rb:416:in `block (3 levels) in start_threads'
+  /usr/lib/ruby/vendor_ruby/phusion_passenger/utils.rb:113:in `block in create_thread_and_abort_on_exception'
+
+
+I, [2018-01-08T02:44:42.480565 #1572]  INFO -- : Started GET "/users/sign_in" for 66.249.82.85 at 2018-01-08 02:44:42 +0000
+I, [2018-01-08T02:44:42.481279 #1572]  INFO -- : Processing by Users::SessionsController#new as HTML
+I, [2018-01-08T02:44:42.512690 #1572]  INFO -- :   Rendered devise/sessions/new.html.erb within layouts/application (30.3ms)
+I, [2018-01-08T02:44:42.512823 #1572]  INFO -- : Completed 401 Unauthorized in 31ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T02:44:42.513597 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f2577600>:0x00005611f4bf5a48>
+Did you mean?  simple_format):
+    1: <h2>Log in</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="form-inputs">
+    5:     <%= f.input :email, required: false, autofocus: true %>
+    6:     <%= f.input :password, required: false %>
+  app/views/devise/sessions/new.html.erb:3:in `_app_views_devise_sessions_new_html_erb___2568838304434631693_47317540180000'
+
+
+I, [2018-01-08T02:44:43.992189 #1572]  INFO -- : Started GET "/users/sign_in" for 203.246.196.46 at 2018-01-08 02:44:43 +0000
+I, [2018-01-08T02:44:43.992906 #1572]  INFO -- : Processing by Users::SessionsController#new as HTML
+I, [2018-01-08T02:44:44.023486 #1572]  INFO -- :   Rendered devise/sessions/new.html.erb within layouts/application (29.4ms)
+I, [2018-01-08T02:44:44.023637 #1572]  INFO -- : Completed 401 Unauthorized in 31ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T02:44:44.024434 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f2577600>:0x00005611f47617e8>
+Did you mean?  simple_format):
+    1: <h2>Log in</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="form-inputs">
+    5:     <%= f.input :email, required: false, autofocus: true %>
+    6:     <%= f.input :password, required: false %>
+  app/views/devise/sessions/new.html.erb:3:in `_app_views_devise_sessions_new_html_erb___2568838304434631693_47317540180000'
+
+
+I, [2018-01-08T04:11:12.399423 #1572]  INFO -- : Started GET "/users/sign_up" for 66.249.82.85 at 2018-01-08 04:11:12 +0000
+I, [2018-01-08T04:11:12.400412 #1572]  INFO -- : Processing by Devise::RegistrationsController#new as HTML
+I, [2018-01-08T04:11:12.435967 #1572]  INFO -- :   Rendered devise/registrations/new.html.erb within layouts/application (34.3ms)
+I, [2018-01-08T04:11:12.436137 #1572]  INFO -- : Completed 401 Unauthorized in 36ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T04:11:12.436870 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f505f9f8>:0x00005611f428da78>
+Did you mean?  simple_format):
+    1: <h2>Sign up</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    4:   <%= f.error_notification %>
+    5: 
+    6:   <div class="form-inputs">
+  app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb___2845059921147057099_70351840554300'
+
+
+I, [2018-01-08T04:11:14.142568 #1572]  INFO -- : Started GET "/users/sign_up" for 203.246.196.46 at 2018-01-08 04:11:14 +0000
+I, [2018-01-08T04:11:14.143570 #1572]  INFO -- : Processing by Devise::RegistrationsController#new as HTML
+I, [2018-01-08T04:11:14.180367 #1572]  INFO -- :   Rendered devise/registrations/new.html.erb within layouts/application (35.4ms)
+I, [2018-01-08T04:11:14.180541 #1572]  INFO -- : Completed 401 Unauthorized in 37ms (ActiveRecord: 0.0ms)
+F, [2018-01-08T04:11:14.181577 #1572] FATAL -- : 
+ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x00005611f505f9f8>:0x00005611f2e56fc8>
+Did you mean?  simple_format):
+    1: <h2>Sign up</h2>
+    2: 
+    3: <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    4:   <%= f.error_notification %>
+    5: 
+    6:   <div class="form-inputs">
+  app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb___2845059921147057099_70351840554300'
+
+
+I, [2018-01-08T04:11:16.061083 #1572]  INFO -- : Started GET "/" for 66.249.82.83 at 2018-01-08 04:11:16 +0000
+I, [2018-01-08T04:11:16.062119 #1572]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:11:16.067899 #1572] DEBUG -- :   [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+I, [2018-01-08T04:11:16.068108 #1572]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.9ms)
+I, [2018-01-08T04:11:16.069035 #1572]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:11:16.069298 #1572]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:11:16.069482 #1572]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:11:16.069711 #1572]  INFO -- : Completed 200 OK in 7ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:16:07.968721 #1525]  INFO -- : Started GET "/users/sign_up" for 66.249.82.83 at 2018-01-08 04:16:07 +0000
+I, [2018-01-08T04:16:07.991994 #1525]  INFO -- : Processing by Devise::RegistrationsController#new as HTML
+I, [2018-01-08T04:16:08.075941 #1532]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:16:08 +0000
+I, [2018-01-08T04:16:08.085080 #1525]  INFO -- :   Rendered devise/shared/_links.html.erb (1.0ms)
+I, [2018-01-08T04:16:08.085169 #1525]  INFO -- :   Rendered devise/registrations/new.html.erb within layouts/application (33.3ms)
+I, [2018-01-08T04:16:08.088046 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.7ms)
+I, [2018-01-08T04:16:08.090115 #1532]  INFO -- : Processing by PostsController#index as HTML
+I, [2018-01-08T04:16:08.091680 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.4ms)
+I, [2018-01-08T04:16:08.092768 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.2ms)
+I, [2018-01-08T04:16:08.093066 #1525]  INFO -- : Completed 200 OK in 101ms (Views: 57.8ms | ActiveRecord: 3.2ms)
+D, [2018-01-08T04:16:08.117098 #1532] DEBUG -- :   [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+I, [2018-01-08T04:16:08.120240 #1532]  INFO -- :   Rendered posts/index.html.erb within layouts/application (5.1ms)
+I, [2018-01-08T04:16:08.122349 #1532]  INFO -- :   Rendered layouts/_navbar.html.erb (0.6ms)
+I, [2018-01-08T04:16:08.123197 #1532]  INFO -- :   Rendered layouts/_flash.html.erb (0.4ms)
+I, [2018-01-08T04:16:08.123909 #1532]  INFO -- :   Rendered layouts/_search_form.html.erb (0.2ms)
+I, [2018-01-08T04:16:08.124156 #1532]  INFO -- : Completed 200 OK in 34ms (Views: 14.9ms | ActiveRecord: 0.5ms)
+I, [2018-01-08T04:16:11.188125 #1525]  INFO -- : Started GET "/users/sign_up" for 66.249.82.85 at 2018-01-08 04:16:11 +0000
+I, [2018-01-08T04:16:11.188975 #1525]  INFO -- : Processing by Devise::RegistrationsController#new as HTML
+I, [2018-01-08T04:16:11.194654 #1525]  INFO -- :   Rendered devise/shared/_links.html.erb (0.2ms)
+I, [2018-01-08T04:16:11.194735 #1525]  INFO -- :   Rendered devise/registrations/new.html.erb within layouts/application (4.6ms)
+I, [2018-01-08T04:16:11.195546 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.3ms)
+I, [2018-01-08T04:16:11.195746 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:16:11.195887 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:16:11.196045 #1525]  INFO -- : Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+I, [2018-01-08T04:16:26.349807 #1525]  INFO -- : Started POST "/users" for 203.246.196.46 at 2018-01-08 04:16:26 +0000
+I, [2018-01-08T04:16:26.350746 #1525]  INFO -- : Processing by Devise::RegistrationsController#create as HTML
+I, [2018-01-08T04:16:26.350832 #1525]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"3oMozY1jiyGYXWJYyjc60vnBAQrjXmoEBs76nLTP4XL7I8ruF4HPXqh9nAtVlfgJJ0vO/hvKYdIEH1smTWDJQw==", "user"=>{"email"=>"aaa@aa.com", "username"=>"adsfasfasdf", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+D, [2018-01-08T04:16:26.513786 #1525] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+D, [2018-01-08T04:16:26.520898 #1525] DEBUG -- :   [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'aaa@aa.com' LIMIT 1
+D, [2018-01-08T04:16:26.522183 #1525] DEBUG -- :   [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("email", "encrypted_password", "username", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "aaa@aa.com"], ["encrypted_password", "$2a$11$3Izl/QLH1A8VzECpWGdMXuZlsZ8FJOKGH5t9ayrqUf0Q/QsaxBxEC"], ["username", "adsfasfasdf"], ["created_at", "2018-01-08 04:16:26.521121"], ["updated_at", "2018-01-08 04:16:26.521121"]]
+D, [2018-01-08T04:16:26.526546 #1525] DEBUG -- :   [1m[35m (3.9ms)[0m  commit transaction
+D, [2018-01-08T04:16:26.527675 #1525] DEBUG -- :   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+D, [2018-01-08T04:16:26.529134 #1525] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2018-01-08 04:16:26.527086"], ["current_sign_in_at", "2018-01-08 04:16:26.527086"], ["last_sign_in_ip", "203.246.196.46"], ["current_sign_in_ip", "203.246.196.46"], ["sign_in_count", 1], ["updated_at", "2018-01-08 04:16:26.527980"], ["id", 1]]
+D, [2018-01-08T04:16:26.532968 #1525] DEBUG -- :   [1m[36m (3.5ms)[0m  [1mcommit transaction[0m
+I, [2018-01-08T04:16:26.536876 #1525]  INFO -- : Redirected to http://13.114.142.253/posts/new
+I, [2018-01-08T04:16:26.537025 #1525]  INFO -- : Completed 302 Found in 186ms (ActiveRecord: 8.1ms)
+I, [2018-01-08T04:16:27.108580 #1525]  INFO -- : Started GET "/posts/new" for 66.249.82.81 at 2018-01-08 04:16:27 +0000
+I, [2018-01-08T04:16:27.110107 #1525]  INFO -- : Processing by PostsController#new as HTML
+D, [2018-01-08T04:16:27.111628 #1525] DEBUG -- :   [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+I, [2018-01-08T04:16:27.126166 #1525]  INFO -- :   Rendered posts/new.html.erb within layouts/application (1.0ms)
+I, [2018-01-08T04:16:27.126829 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:16:27.127012 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:16:27.127148 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:16:27.127386 #1525]  INFO -- : Completed 200 OK in 17ms (Views: 6.0ms | ActiveRecord: 0.4ms)
+I, [2018-01-08T04:16:33.108569 #1525]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:16:33 +0000
+I, [2018-01-08T04:16:33.109478 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:16:33.110934 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:16:33.116013 #1525] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:16:33.116136 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (1.0ms)
+I, [2018-01-08T04:16:33.116750 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:16:33.116933 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:16:33.117061 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:16:33.117220 #1525]  INFO -- : Completed 200 OK in 8ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:16:35.401575 #1525]  INFO -- : Started GET "/posts/new" for 66.249.82.85 at 2018-01-08 04:16:35 +0000
+I, [2018-01-08T04:16:35.402431 #1525]  INFO -- : Processing by PostsController#new as HTML
+D, [2018-01-08T04:16:35.403544 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+I, [2018-01-08T04:16:35.409444 #1525]  INFO -- :   Rendered posts/new.html.erb within layouts/application (0.5ms)
+I, [2018-01-08T04:16:35.410116 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:16:35.410291 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:16:35.410411 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:16:35.410614 #1525]  INFO -- : Completed 200 OK in 8ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+I, [2018-01-08T04:16:43.164211 #1525]  INFO -- : Started POST "/posts" for 203.246.196.46 at 2018-01-08 04:16:43 +0000
+I, [2018-01-08T04:16:43.165083 #1525]  INFO -- : Processing by PostsController#create as HTML
+I, [2018-01-08T04:16:43.165177 #1525]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"9mbHKyqUET4h9BTJC/WYfD7+OT0Vg+72+ZU73sJoJmXTxiUIsHZVQRHU6pqUV1qn4HT2ye0X5SD7RJpkO8cOVA==", "post"=>{"title"=>"adsfasfs", "content"=>"dfasdfsafa", "postimage"=>#<ActionDispatch::Http::UploadedFile:0x000055cac1992e88 @tempfile=#<Tempfile:/tmp/RackMultipart20180108-1525-omj8x9.jpg>, @original_filename="541435caecd438b23a80efbaceb5da948283f690c8dacee4de176a99acc72d43.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"post[postimage]\"; filename=\"541435caecd438b23a80efbaceb5da948283f690c8dacee4de176a99acc72d43.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "button"=>""}
+D, [2018-01-08T04:16:43.166198 #1525] DEBUG -- :   [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+D, [2018-01-08T04:16:43.183603 #1525] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+D, [2018-01-08T04:16:43.190117 #1525] DEBUG -- :   [1m[35m (0.1ms)[0m  commit transaction
+I, [2018-01-08T04:16:43.190312 #1525]  INFO -- : Redirected to http://13.114.142.253/
+I, [2018-01-08T04:16:43.190443 #1525]  INFO -- : Completed 302 Found in 25ms (ActiveRecord: 0.2ms)
+I, [2018-01-08T04:16:43.844696 #1525]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:16:43 +0000
+I, [2018-01-08T04:16:43.845475 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:16:43.847461 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:16:43.851300 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:16:43.851407 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T04:16:43.852000 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:16:43.852179 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:16:43.852317 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:16:43.852485 #1525]  INFO -- : Completed 200 OK in 7ms (Views: 1.7ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:16:55.769406 #1525]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:16:55 +0000
+I, [2018-01-08T04:16:55.770558 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:16:55.772955 #1525] DEBUG -- :   [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:16:55.777243 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:16:55.777388 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T04:16:55.778251 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:16:55.778488 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:16:55.778705 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:16:55.778962 #1525]  INFO -- : Completed 200 OK in 8ms (Views: 2.3ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:16:57.408802 #1525]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:16:57 +0000
+I, [2018-01-08T04:16:57.409993 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:16:57.412273 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:16:57.416864 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:16:57.417026 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.7ms)
+I, [2018-01-08T04:16:57.417760 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:16:57.417990 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:16:57.418157 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:16:57.418386 #1525]  INFO -- : Completed 200 OK in 8ms (Views: 2.2ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:16:58.379693 #1525]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:16:58 +0000
+I, [2018-01-08T04:16:58.380818 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:16:58.383065 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:16:58.387632 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:16:58.387809 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.7ms)
+I, [2018-01-08T04:16:58.388649 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:16:58.388880 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:16:58.389063 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:16:58.389275 #1525]  INFO -- : Completed 200 OK in 8ms (Views: 2.4ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:16:59.474754 #1525]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:16:59 +0000
+I, [2018-01-08T04:16:59.475918 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:16:59.478131 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:16:59.482324 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:16:59.482468 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T04:16:59.483279 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:16:59.483522 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:16:59.483737 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:16:59.483971 #1525]  INFO -- : Completed 200 OK in 8ms (Views: 2.2ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:17:00.105394 #1525]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:17:00 +0000
+I, [2018-01-08T04:17:00.106268 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:17:00.108099 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:00.111875 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:17:00.111985 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T04:17:00.112561 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:17:00.112787 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:00.112916 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:00.113074 #1525]  INFO -- : Completed 200 OK in 7ms (Views: 1.7ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:17:01.006177 #1525]  INFO -- : Started GET "/" for 66.249.82.83 at 2018-01-08 04:17:01 +0000
+I, [2018-01-08T04:17:01.006933 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:17:01.008693 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:01.012314 #1525] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:17:01.012422 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.5ms)
+I, [2018-01-08T04:17:01.013030 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:17:01.013192 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:01.013313 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:01.013476 #1525]  INFO -- : Completed 200 OK in 6ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:17:02.161658 #1525]  INFO -- : Started GET "/" for 66.249.82.83 at 2018-01-08 04:17:02 +0000
+I, [2018-01-08T04:17:02.162451 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:17:02.164259 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:02.167912 #1525] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:17:02.168024 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.5ms)
+I, [2018-01-08T04:17:02.168618 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:17:02.168784 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:02.168907 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:02.169061 #1525]  INFO -- : Completed 200 OK in 7ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:17:03.008041 #1525]  INFO -- : Started GET "/" for 66.249.82.81 at 2018-01-08 04:17:03 +0000
+I, [2018-01-08T04:17:03.008818 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:17:03.010515 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:03.014162 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:17:03.014293 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T04:17:03.014883 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:17:03.015061 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:03.015232 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:03.015411 #1525]  INFO -- : Completed 200 OK in 7ms (Views: 1.8ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:17:05.157517 #1525]  INFO -- : Started DELETE "/users/sign_out" for 203.246.196.46 at 2018-01-08 04:17:05 +0000
+I, [2018-01-08T04:17:05.159016 #1525]  INFO -- : Processing by Users::SessionsController#destroy as HTML
+I, [2018-01-08T04:17:05.159085 #1525]  INFO -- :   Parameters: {"authenticity_token"=>"fXjQK05aQ8hGEk9VHJxv4o59U3D5lP+nKiO062NZW3VY2DII1LgHt3YysQaDPq05UPechAEA9HEo8hVRmvZzRA=="}
+D, [2018-01-08T04:17:05.160242 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:05.163278 #1525] DEBUG -- :   [1m[35m (0.1ms)[0m  begin transaction
+D, [2018-01-08T04:17:05.164169 #1525] DEBUG -- :   [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+I, [2018-01-08T04:17:05.164800 #1525]  INFO -- : Redirected to http://13.114.142.253/
+I, [2018-01-08T04:17:05.164938 #1525]  INFO -- : Completed 302 Found in 6ms (ActiveRecord: 0.2ms)
+I, [2018-01-08T04:17:05.581228 #1525]  INFO -- : Started GET "/" for 66.249.82.81 at 2018-01-08 04:17:05 +0000
+I, [2018-01-08T04:17:05.581962 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:17:05.586678 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:17:05.586806 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T04:17:05.587478 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:17:05.587664 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:05.587813 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:05.587982 #1525]  INFO -- : Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:17:12.380525 #1525]  INFO -- : Started GET "/users/sign_in" for 66.249.82.85 at 2018-01-08 04:17:12 +0000
+I, [2018-01-08T04:17:12.381470 #1525]  INFO -- : Processing by Users::SessionsController#new as HTML
+I, [2018-01-08T04:17:12.393935 #1525]  INFO -- :   Rendered devise/shared/_links.html.erb (0.4ms)
+I, [2018-01-08T04:17:12.394008 #1525]  INFO -- :   Rendered devise/sessions/new.html.erb within layouts/application (5.1ms)
+I, [2018-01-08T04:17:12.394688 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.3ms)
+I, [2018-01-08T04:17:12.394870 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:12.394988 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:12.395147 #1525]  INFO -- : Completed 200 OK in 14ms (Views: 12.7ms | ActiveRecord: 0.0ms)
+I, [2018-01-08T04:17:18.643193 #1525]  INFO -- : Started POST "/users/sign_in" for 203.246.196.46 at 2018-01-08 04:17:18 +0000
+I, [2018-01-08T04:17:18.644125 #1525]  INFO -- : Processing by Users::SessionsController#create as HTML
+I, [2018-01-08T04:17:18.644182 #1525]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"i+lbEl0OsJRjYrl3JaF5u02e1l6YVOSHybwzDdos2WPbn8fdysDTmlyeKL18N8QP1Ry5UEACJfNQIyIKVT+SwA==", "user"=>{"email"=>"aaa@aa.com", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+D, [2018-01-08T04:17:18.647006 #1525] DEBUG -- :   [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "aaa@aa.com"]]
+D, [2018-01-08T04:17:18.797176 #1525] DEBUG -- :   [1m[35m (0.1ms)[0m  begin transaction
+D, [2018-01-08T04:17:18.798134 #1525] DEBUG -- :   [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "remember_created_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["remember_created_at", "2018-01-08 04:17:18.796835"], ["updated_at", "2018-01-08 04:17:18.797349"], ["id", 1]]
+D, [2018-01-08T04:17:18.802482 #1525] DEBUG -- :   [1m[35m (4.0ms)[0m  commit transaction
+D, [2018-01-08T04:17:18.803410 #1525] DEBUG -- :   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+D, [2018-01-08T04:17:18.804372 #1525] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  UPDATE "users" SET "current_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["current_sign_in_at", "2018-01-08 04:17:18.802927"], ["sign_in_count", 2], ["updated_at", "2018-01-08 04:17:18.803701"], ["id", 1]]
+D, [2018-01-08T04:17:18.808302 #1525] DEBUG -- :   [1m[36m (3.7ms)[0m  [1mcommit transaction[0m
+I, [2018-01-08T04:17:18.811081 #1525]  INFO -- : Redirected to http://13.114.142.253/
+I, [2018-01-08T04:17:18.811232 #1525]  INFO -- : Completed 302 Found in 167ms (ActiveRecord: 8.2ms)
+I, [2018-01-08T04:17:19.359368 #1525]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:17:19 +0000
+I, [2018-01-08T04:17:19.360100 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:17:19.361837 #1525] DEBUG -- :   [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+D, [2018-01-08T04:17:19.365630 #1525] DEBUG -- :   [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+I, [2018-01-08T04:17:19.365741 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.5ms)
+I, [2018-01-08T04:17:19.366356 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:17:19.366543 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:19.366680 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:19.366858 #1525]  INFO -- : Completed 200 OK in 7ms (Views: 1.7ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:17:25.374227 #1525]  INFO -- : Started GET "/posts/new" for 66.249.82.85 at 2018-01-08 04:17:25 +0000
+I, [2018-01-08T04:17:25.375394 #1525]  INFO -- : Processing by PostsController#new as HTML
+D, [2018-01-08T04:17:25.376758 #1525] DEBUG -- :   [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+I, [2018-01-08T04:17:25.383363 #1525]  INFO -- :   Rendered posts/new.html.erb within layouts/application (0.7ms)
+I, [2018-01-08T04:17:25.384123 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:17:25.384341 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:25.384540 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.1ms)
+I, [2018-01-08T04:17:25.384769 #1525]  INFO -- : Completed 200 OK in 9ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+I, [2018-01-08T04:17:27.957364 #1525]  INFO -- : Started POST "/posts" for 203.246.196.46 at 2018-01-08 04:17:27 +0000
+I, [2018-01-08T04:17:27.958160 #1525]  INFO -- : Processing by PostsController#create as HTML
+I, [2018-01-08T04:17:27.958212 #1525]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"Psc+OBLrFXlIoic8ZhRyI2VKijg1w4ueoPYGavvpz1nNmOtx/sHI6CbbSk8dmp3Jwkn5J7A/oJXRT6MS3XFXew==", "post"=>{"title"=>"asdfas", "content"=>"sdfasdf"}, "button"=>""}
+D, [2018-01-08T04:17:27.959269 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:27.962729 #1525] DEBUG -- :   [1m[35m (0.1ms)[0m  begin transaction
+D, [2018-01-08T04:17:27.964319 #1525] DEBUG -- :   [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "posts" ("title", "content", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "asdfas"], ["content", "sdfasdf"], ["user_id", 1], ["created_at", "2018-01-08 04:17:27.963460"], ["updated_at", "2018-01-08 04:17:27.963460"]]
+D, [2018-01-08T04:17:27.968673 #1525] DEBUG -- :   [1m[35m (4.0ms)[0m  commit transaction
+I, [2018-01-08T04:17:27.969132 #1525]  INFO -- : Redirected to http://13.114.142.253/
+I, [2018-01-08T04:17:27.969249 #1525]  INFO -- : Completed 302 Found in 11ms (ActiveRecord: 4.3ms)
+I, [2018-01-08T04:17:28.760741 #1525]  INFO -- : Started POST "/posts" for 203.246.196.46 at 2018-01-08 04:17:28 +0000
+I, [2018-01-08T04:17:28.761532 #1525]  INFO -- : Processing by PostsController#create as HTML
+I, [2018-01-08T04:17:28.761590 #1525]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"Psc+OBLrFXlIoic8ZhRyI2VKijg1w4ueoPYGavvpz1nNmOtx/sHI6CbbSk8dmp3Jwkn5J7A/oJXRT6MS3XFXew==", "post"=>{"title"=>"asdfas", "content"=>"sdfasdf"}, "button"=>""}
+D, [2018-01-08T04:17:28.762635 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:28.765844 #1525] DEBUG -- :   [1m[35m (0.1ms)[0m  begin transaction
+D, [2018-01-08T04:17:28.767091 #1525] DEBUG -- :   [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "posts" ("title", "content", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "asdfas"], ["content", "sdfasdf"], ["user_id", 1], ["created_at", "2018-01-08 04:17:28.766426"], ["updated_at", "2018-01-08 04:17:28.766426"]]
+D, [2018-01-08T04:17:28.771505 #1525] DEBUG -- :   [1m[35m (4.0ms)[0m  commit transaction
+I, [2018-01-08T04:17:28.771739 #1525]  INFO -- : Redirected to http://13.114.142.253/
+I, [2018-01-08T04:17:28.771865 #1525]  INFO -- : Completed 302 Found in 10ms (ActiveRecord: 4.2ms)
+I, [2018-01-08T04:17:29.305399 #1525]  INFO -- : Started GET "/" for 66.249.82.85 at 2018-01-08 04:17:29 +0000
+I, [2018-01-08T04:17:29.306060 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:17:29.307313 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:29.310992 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:17:29.311336 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.8ms)
+I, [2018-01-08T04:17:29.311923 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:17:29.312081 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:29.312237 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:29.312407 #1525]  INFO -- : Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:17:32.381389 #1525]  INFO -- : Started GET "/posts/2" for 66.249.82.85 at 2018-01-08 04:17:32 +0000
+I, [2018-01-08T04:17:32.382168 #1525]  INFO -- : Processing by PostsController#show as HTML
+I, [2018-01-08T04:17:32.382218 #1525]  INFO -- :   Parameters: {"id"=>"2"}
+D, [2018-01-08T04:17:32.385021 #1525] DEBUG -- :   [1m[36mPost Load (0.2ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1[0m  [["id", 2]]
+D, [2018-01-08T04:17:32.385618 #1525] DEBUG -- :   [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+D, [2018-01-08T04:17:32.389246 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+I, [2018-01-08T04:17:32.389572 #1525]  INFO -- :   Rendered posts/show.html.erb within layouts/application (1.5ms)
+I, [2018-01-08T04:17:32.390290 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:17:32.390487 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:32.390620 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:32.390810 #1525]  INFO -- : Completed 200 OK in 9ms (Views: 3.8ms | ActiveRecord: 0.4ms)
+I, [2018-01-08T04:17:35.851395 #1525]  INFO -- : Started DELETE "/posts/2" for 203.246.196.46 at 2018-01-08 04:17:35 +0000
+I, [2018-01-08T04:17:35.852515 #1525]  INFO -- : Processing by PostsController#destroy as HTML
+I, [2018-01-08T04:17:35.852583 #1525]  INFO -- :   Parameters: {"authenticity_token"=>"HErBcXF6xiP/fu3zxmjXheAdeFzyqmejK//rUhtshNDvFRQ4nVAbspEHgIC95jhvRx4LQ3dWTKhaRk4qPfQc8g==", "id"=>"2"}
+D, [2018-01-08T04:17:35.853543 #1525] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1  [["id", 2]]
+D, [2018-01-08T04:17:35.854427 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:35.855413 #1525] DEBUG -- :   [1m[35m (0.1ms)[0m  begin transaction
+D, [2018-01-08T04:17:35.856034 #1525] DEBUG -- :   [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 2]]
+D, [2018-01-08T04:17:35.860395 #1525] DEBUG -- :   [1m[35m (4.2ms)[0m  commit transaction
+I, [2018-01-08T04:17:35.860762 #1525]  INFO -- : Redirected to http://13.114.142.253/
+I, [2018-01-08T04:17:35.860909 #1525]  INFO -- : Completed 302 Found in 8ms (ActiveRecord: 4.7ms)
+I, [2018-01-08T04:17:36.314624 #1525]  INFO -- : Started GET "/" for 66.249.82.81 at 2018-01-08 04:17:36 +0000
+I, [2018-01-08T04:17:36.315561 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:17:36.317272 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:36.321986 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:17:36.322368 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (1.0ms)
+I, [2018-01-08T04:17:36.323152 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:17:36.323424 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:36.323613 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:36.323844 #1525]  INFO -- : Completed 200 OK in 8ms (Views: 2.5ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:17:38.004822 #1525]  INFO -- : Started GET "/posts/1" for 66.249.82.83 at 2018-01-08 04:17:38 +0000
+I, [2018-01-08T04:17:38.006038 #1525]  INFO -- : Processing by PostsController#show as HTML
+I, [2018-01-08T04:17:38.006102 #1525]  INFO -- :   Parameters: {"id"=>"1"}
+D, [2018-01-08T04:17:38.007029 #1525] DEBUG -- :   [1m[36mPost Load (0.1ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:17:38.008129 #1525] DEBUG -- :   [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+D, [2018-01-08T04:17:38.010489 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+I, [2018-01-08T04:17:38.010894 #1525]  INFO -- :   Rendered posts/show.html.erb within layouts/application (1.0ms)
+I, [2018-01-08T04:17:38.011860 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:17:38.012089 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:17:38.012271 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:38.012503 #1525]  INFO -- : Completed 200 OK in 6ms (Views: 2.8ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:17:41.273471 #1525]  INFO -- : Started GET "/posts/new" for 66.249.82.83 at 2018-01-08 04:17:41 +0000
+I, [2018-01-08T04:17:41.274282 #1525]  INFO -- : Processing by PostsController#new as HTML
+D, [2018-01-08T04:17:41.275373 #1525] DEBUG -- :   [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+I, [2018-01-08T04:17:41.280632 #1525]  INFO -- :   Rendered posts/new.html.erb within layouts/application (0.4ms)
+I, [2018-01-08T04:17:41.281276 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:17:41.281465 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.0ms)
+I, [2018-01-08T04:17:41.281595 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:17:41.281776 #1525]  INFO -- : Completed 200 OK in 7ms (Views: 1.7ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:18:06.560347 #1525]  INFO -- : Started POST "/posts" for 203.246.196.46 at 2018-01-08 04:18:06 +0000
+I, [2018-01-08T04:18:06.561124 #1525]  INFO -- : Processing by PostsController#create as HTML
+I, [2018-01-08T04:18:06.561206 #1525]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"ofVeb0gGBRHV1jWymhnY2vcjWjK/NicCsGCSu4jNwxRSqosmpCzYgLuvWMHhlzcwUCApLTrKDAnB2TfDrlVbNg==", "post"=>{"title"=>"dsfa", "content"=>"fsdsfsdf", "postimage"=>#<ActionDispatch::Http::UploadedFile:0x000055cac36ff7c8 @tempfile=#<Tempfile:/tmp/RackMultipart20180108-1525-iob7x5.PNG>, @original_filename="dddddd.PNG", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"post[postimage]\"; filename=\"dddddd.PNG\"\r\nContent-Type: image/png\r\n">}, "button"=>""}
+D, [2018-01-08T04:18:06.562214 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:18:06.567500 #1525] DEBUG -- :   [1m[35m (0.1ms)[0m  begin transaction
+D, [2018-01-08T04:18:06.569672 #1525] DEBUG -- :   [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+I, [2018-01-08T04:18:06.569865 #1525]  INFO -- : Redirected to http://13.114.142.253/
+I, [2018-01-08T04:18:06.569977 #1525]  INFO -- : Completed 302 Found in 9ms (ActiveRecord: 0.2ms)
+I, [2018-01-08T04:18:06.865312 #1525]  INFO -- : Started GET "/" for 66.249.82.83 at 2018-01-08 04:18:06 +0000
+I, [2018-01-08T04:18:06.866147 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:18:06.867590 #1525] DEBUG -- :   [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+D, [2018-01-08T04:18:06.871338 #1525] DEBUG -- :   [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+I, [2018-01-08T04:18:06.871602 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.7ms)
+I, [2018-01-08T04:18:06.872164 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:18:06.872343 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:18:06.872468 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:18:06.872636 #1525]  INFO -- : Completed 200 OK in 6ms (Views: 1.8ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:19:08.147334 #1525]  INFO -- : Started GET "/" for 110.70.52.168 at 2018-01-08 04:19:08 +0000
+I, [2018-01-08T04:19:08.148141 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:19:08.152584 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:19:08.152850 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.8ms)
+I, [2018-01-08T04:19:08.153505 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:19:08.153692 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:19:08.153804 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:19:08.153974 #1525]  INFO -- : Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:19:21.240842 #1525]  INFO -- : Started GET "/" for 211.231.103.107 at 2018-01-08 04:19:21 +0000
+I, [2018-01-08T04:19:21.241638 #1525]  INFO -- : Processing by PostsController#index as */*
+D, [2018-01-08T04:19:21.248471 #1525] DEBUG -- :   [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+I, [2018-01-08T04:19:21.248759 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (1.2ms)
+I, [2018-01-08T04:19:21.251511 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.5ms)
+I, [2018-01-08T04:19:21.253522 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.3ms)
+I, [2018-01-08T04:19:21.255778 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.2ms)
+I, [2018-01-08T04:19:21.255964 #1525]  INFO -- : Completed 200 OK in 14ms (Views: 10.4ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:19:41.169053 #1525]  INFO -- : Started GET "/" for 110.70.52.168 at 2018-01-08 04:19:41 +0000
+I, [2018-01-08T04:19:41.169871 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:19:41.174192 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:19:41.174470 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.8ms)
+I, [2018-01-08T04:19:41.175180 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:19:41.175405 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:19:41.175536 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:19:41.175721 #1525]  INFO -- : Completed 200 OK in 6ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:19:47.364733 #1525]  INFO -- : Started GET "/posts/new" for 110.70.52.168 at 2018-01-08 04:19:47 +0000
+I, [2018-01-08T04:19:47.365539 #1525]  INFO -- : Processing by PostsController#new as HTML
+I, [2018-01-08T04:19:47.366136 #1525]  INFO -- : Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+I, [2018-01-08T04:19:47.471719 #1525]  INFO -- : Started GET "/users/sign_in" for 110.70.52.168 at 2018-01-08 04:19:47 +0000
+I, [2018-01-08T04:19:47.472322 #1525]  INFO -- : Processing by Users::SessionsController#new as HTML
+I, [2018-01-08T04:19:47.477101 #1525]  INFO -- :   Rendered devise/shared/_links.html.erb (0.2ms)
+I, [2018-01-08T04:19:47.477177 #1525]  INFO -- :   Rendered devise/sessions/new.html.erb within layouts/application (3.7ms)
+I, [2018-01-08T04:19:47.477850 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.3ms)
+I, [2018-01-08T04:19:47.478046 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:19:47.478197 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:19:47.478352 #1525]  INFO -- : Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.0ms)
+I, [2018-01-08T04:19:50.204227 #1525]  INFO -- : Started POST "/users/sign_in" for 110.70.52.168 at 2018-01-08 04:19:50 +0000
+I, [2018-01-08T04:19:50.204953 #1525]  INFO -- : Processing by Users::SessionsController#create as HTML
+I, [2018-01-08T04:19:50.205020 #1525]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"26zDPzjr72JFLSKQNNA9L6P7/B67nG4FZO926mosd8kRlkCNfL1eHzuvqm68n0D5vbBQQRDNQTQ6KjzLH26SYQ==", "user"=>{"email"=>"aaa@aa.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+D, [2018-01-08T04:19:50.206387 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "aaa@aa.com"]]
+D, [2018-01-08T04:19:50.356694 #1525] DEBUG -- :   [1m[35m (0.1ms)[0m  begin transaction
+D, [2018-01-08T04:19:50.358041 #1525] DEBUG -- :   [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_sign_in_at", "2018-01-08 04:17:18.802927"], ["current_sign_in_at", "2018-01-08 04:19:50.356080"], ["current_sign_in_ip", "110.70.52.168"], ["sign_in_count", 3], ["updated_at", "2018-01-08 04:19:50.357078"], ["id", 1]]
+D, [2018-01-08T04:19:50.362260 #1525] DEBUG -- :   [1m[35m (3.8ms)[0m  commit transaction
+I, [2018-01-08T04:19:50.363142 #1525]  INFO -- : Redirected to http://13.114.142.253/posts/new
+I, [2018-01-08T04:19:50.363301 #1525]  INFO -- : Completed 302 Found in 158ms (ActiveRecord: 4.2ms)
+I, [2018-01-08T04:19:50.580579 #1525]  INFO -- : Started GET "/posts/new" for 110.70.52.168 at 2018-01-08 04:19:50 +0000
+I, [2018-01-08T04:19:50.581226 #1525]  INFO -- : Processing by PostsController#new as HTML
+D, [2018-01-08T04:19:50.582085 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+I, [2018-01-08T04:19:50.587917 #1525]  INFO -- :   Rendered posts/new.html.erb within layouts/application (0.5ms)
+I, [2018-01-08T04:19:50.588578 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:19:50.588772 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:19:50.588896 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:19:50.589066 #1525]  INFO -- : Completed 200 OK in 8ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+I, [2018-01-08T04:20:09.233478 #1525]  INFO -- : Started POST "/posts" for 110.70.52.168 at 2018-01-08 04:20:09 +0000
+I, [2018-01-08T04:20:09.234189 #1525]  INFO -- : Processing by PostsController#create as HTML
+I, [2018-01-08T04:20:09.234264 #1525]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"v1VRux+RM9n6neLZC6ETlVSVZZuWGlkjwqIpoElG8XPcGaTN/0ftBk+SRbwBd+s6famj59mdnR/rdKY+7jiVrw==", "post"=>{"title"=>"ㄴㄷㄱㄷㄱ", "content"=>"ㄴㄷㅅㅈㅅ", "postimage"=>#<ActionDispatch::Http::UploadedFile:0x000055cac3fec200 @tempfile=#<Tempfile:/tmp/RackMultipart20180108-1525-8w1i9z.png>, @original_filename="Screenshot_2018-01-08-12-40-18-284_com.android.chrome.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"post[postimage]\"; filename=\"Screenshot_2018-01-08-12-40-18-284_com.android.chrome.png\"\r\nContent-Type: image/png\r\n">}, "button"=>""}
+D, [2018-01-08T04:20:09.235189 #1525] DEBUG -- :   [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+D, [2018-01-08T04:20:09.241361 #1525] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+D, [2018-01-08T04:20:09.244617 #1525] DEBUG -- :   [1m[35m (0.0ms)[0m  commit transaction
+I, [2018-01-08T04:20:09.244777 #1525]  INFO -- : Redirected to http://13.114.142.253/
+I, [2018-01-08T04:20:09.244880 #1525]  INFO -- : Completed 302 Found in 11ms (ActiveRecord: 0.2ms)
+I, [2018-01-08T04:20:09.358377 #1525]  INFO -- : Started GET "/" for 110.70.52.168 at 2018-01-08 04:20:09 +0000
+I, [2018-01-08T04:20:09.359039 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:20:09.360278 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:20:09.363843 #1525] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:20:09.364090 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.7ms)
+I, [2018-01-08T04:20:09.364625 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:20:09.364793 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.1ms)
+I, [2018-01-08T04:20:09.364900 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:20:09.365060 #1525]  INFO -- : Completed 200 OK in 6ms (Views: 1.7ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:20:11.195606 #1525]  INFO -- : Started GET "/" for 110.70.52.168 at 2018-01-08 04:20:11 +0000
+I, [2018-01-08T04:20:11.196356 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:20:11.198081 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:20:11.201688 #1525] DEBUG -- :   [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:20:11.201950 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.7ms)
+I, [2018-01-08T04:20:11.202495 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:20:11.202656 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.0ms)
+I, [2018-01-08T04:20:11.202790 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:20:11.202986 #1525]  INFO -- : Completed 200 OK in 7ms (Views: 1.7ms | ActiveRecord: 0.2ms)
+I, [2018-01-08T04:20:12.390926 #1525]  INFO -- : Started GET "/" for 110.70.52.168 at 2018-01-08 04:20:12 +0000
+I, [2018-01-08T04:20:12.391701 #1525]  INFO -- : Processing by PostsController#index as HTML
+D, [2018-01-08T04:20:12.393435 #1525] DEBUG -- :   [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:20:12.397062 #1525] DEBUG -- :   [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+I, [2018-01-08T04:20:12.397309 #1525]  INFO -- :   Rendered posts/index.html.erb within layouts/application (0.6ms)
+I, [2018-01-08T04:20:12.397869 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.1ms)
+I, [2018-01-08T04:20:12.398020 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.0ms)
+I, [2018-01-08T04:20:12.398174 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:20:12.398505 #1525]  INFO -- : Completed 200 OK in 7ms (Views: 1.9ms | ActiveRecord: 0.3ms)
+I, [2018-01-08T04:20:39.284813 #1525]  INFO -- : Started GET "/posts/1" for 66.249.82.81 at 2018-01-08 04:20:39 +0000
+I, [2018-01-08T04:20:39.285635 #1525]  INFO -- : Processing by PostsController#show as HTML
+I, [2018-01-08T04:20:39.285675 #1525]  INFO -- :   Parameters: {"id"=>"1"}
+D, [2018-01-08T04:20:39.286312 #1525] DEBUG -- :   [1m[36mPost Load (0.1ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1[0m  [["id", 1]]
+D, [2018-01-08T04:20:39.287014 #1525] DEBUG -- :   [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+D, [2018-01-08T04:20:39.288962 #1525] DEBUG -- :   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+I, [2018-01-08T04:20:39.289268 #1525]  INFO -- :   Rendered posts/show.html.erb within layouts/application (0.8ms)
+I, [2018-01-08T04:20:39.289869 #1525]  INFO -- :   Rendered layouts/_navbar.html.erb (0.2ms)
+I, [2018-01-08T04:20:39.290014 #1525]  INFO -- :   Rendered layouts/_flash.html.erb (0.0ms)
+I, [2018-01-08T04:20:39.290145 #1525]  INFO -- :   Rendered layouts/_search_form.html.erb (0.0ms)
+I, [2018-01-08T04:20:39.290320 #1525]  INFO -- : Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.2ms)
