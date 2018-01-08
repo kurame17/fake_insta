@@ -1,21 +1,18 @@
 source 'https://rubygems.org'
 
-# 회원 권한 기능
 gem 'cancancan', '~> 2.0'
 
-# 회원가입 기능
 gem 'devise'
 
-# pagenation
 gem 'kaminari'
 
-# 파일업로더
 gem 'carrierwave', '~> 1.0'
 
-# 이미지편집
 gem 'mini_magick'
 
 gem 'figaro'
+
+gem 'fog'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
