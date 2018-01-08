@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-center mt-3">
+  <figure class="figure">
+    <img src="<%= @post.postimage%>" class="figure-img img-fluid rounded" style="height: 70vh;">
+    <figcaption class="figure-caption">
+      <h5><%= @post.title %></h5>
+      <h6 class="text-right">글쓴이 : <%= @post.user.username %></h6>
+      <h6><%= @post.content %></h6>
+    </figcaption>
+  </figure>
+</div>
+
+
+
+
+<%# if can? :update, @post %>
+  <p><a href="/posts/<%=@post.id%>/edit">수정</a></p>
+<%# end %>
+
+<% if can? :destroy, @post %>
+  <p><a href="/posts/<%=@post.id%>" data-method="delete" data-confirm="삭제할래?">삭제</a></p>
+<% end %>
