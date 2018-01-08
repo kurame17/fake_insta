@@ -49,3 +49,181 @@ Migrating to AddAdminToUsers (20180104041313)
             FROM sqlite_temp_master
             WHERE name='index_users_on_email' AND type='index'
 
+
+
+Started GET "/" for 127.0.0.1 at 2018-01-08 14:20:12 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PostsController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (title LIKE '%%')[0m
+  Rendered posts/index.html.erb within layouts/application (14.2ms)
+  Rendered layouts/_navbar.html.erb (0.8ms)
+  Rendered layouts/_flash.html.erb (0.5ms)
+  Rendered layouts/_search_form.html.erb (0.4ms)
+Completed 200 OK in 1097ms (Views: 992.4ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/posts/2" for 127.0.0.1 at 2018-01-08 14:20:15 +0900
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mPost Load (0.3ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1  [["id", 2]]
+Completed 401 Unauthorized in 9ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-01-08 14:20:16 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (2.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (88.3ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+  Rendered layouts/_flash.html.erb (0.1ms)
+  Rendered layouts/_search_form.html.erb (0.0ms)
+Completed 200 OK in 224ms (Views: 219.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-01-08 14:20:21 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SjcK90/ISI5/m0EjaDrG+iCe94F1gIdy9b3/VH82ulBqkZL+4VPmIZXCjDDtEo3HPNmCiIg74RU9W6n/USEacw==", "user"=>{"email"=>"aaa@aa.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "aaa@aa.com"]]
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.3ms)
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SjcK90/ISI5/m0EjaDrG+iCe94F1gIdy9b3/VH82ulBqkZL+4VPmIZXCjDDtEo3HPNmCiIg74RU9W6n/USEacw==", "user"=>{"email"=>"aaa@aa.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (29.4ms)
+  Rendered layouts/_navbar.html.erb (0.2ms)
+  Rendered layouts/_flash.html.erb (0.5ms)
+  Rendered layouts/_search_form.html.erb (0.1ms)
+Completed 200 OK in 364ms (Views: 157.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-01-08 14:20:23 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Lf8GxmzH8nAdJpsDR+43ALp7Em/uiQLv5ZZYjgMdZ3QNWZ7Pwlxc3/d/VhDCxnw9pjxnZhMyZIgtcA4lLQrHVw==", "user"=>{"email"=>"aaa@aa.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "aaa@aa.com"]]
+Completed 401 Unauthorized in 4ms (ActiveRecord: 0.3ms)
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Lf8GxmzH8nAdJpsDR+43ALp7Em/uiQLv5ZZYjgMdZ3QNWZ7Pwlxc3/d/VhDCxnw9pjxnZhMyZIgtcA4lLQrHVw==", "user"=>{"email"=>"aaa@aa.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (21.9ms)
+  Rendered layouts/_navbar.html.erb (0.2ms)
+  Rendered layouts/_flash.html.erb (0.1ms)
+  Rendered layouts/_search_form.html.erb (0.0ms)
+Completed 200 OK in 276ms (Views: 141.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-01-08 14:20:25 +0900
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.3ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (25.5ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+  Rendered layouts/_flash.html.erb (0.1ms)
+  Rendered layouts/_search_form.html.erb (0.1ms)
+Completed 200 OK in 123ms (Views: 122.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-01-08 14:20:31 +0900
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"W937+4srf8LuG3odXKXvtF7d4Cgb2FzKx4F/OBC9pil7e2PyJbDRbQRCtw7ZjaSJQpqVIeZjOq0PZymTPqoGCg==", "user"=>{"email"=>"aaa@aa.com", "username"=>"aa", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'aaa@aa.com' LIMIT 1
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "users" ("email", "encrypted_password", "username", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "aaa@aa.com"], ["encrypted_password", "$2a$11$R2jegXexBw6NLtWH4vrqo.UYHGF5gmcR5MJrt12R392Sav5bmogue"], ["username", "aa"], ["created_at", "2018-01-08 05:20:31.704585"], ["updated_at", "2018-01-08 05:20:31.704585"]]
+  [1m[35m (2.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.5ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2018-01-08 05:20:31.712444"], ["current_sign_in_at", "2018-01-08 05:20:31.712444"], ["last_sign_in_ip", "127.0.0.1"], ["current_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", "2018-01-08 05:20:31.714123"], ["id", 2]]
+  [1m[36m (2.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/posts/2
+Completed 302 Found in 208ms (ActiveRecord: 8.7ms)
+
+
+Started GET "/posts/2" for 127.0.0.1 at 2018-01-08 14:20:31 +0900
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mPost Load (0.3ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered posts/show.html.erb within layouts/application (36.7ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+  Rendered layouts/_flash.html.erb (0.1ms)
+  Rendered layouts/_search_form.html.erb (0.0ms)
+Completed 200 OK in 138ms (Views: 133.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/posts/2/edit" for 127.0.0.1 at 2018-01-08 14:20:34 +0900
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  Rendered posts/edit.html.erb within layouts/application (1.5ms)
+  Rendered layouts/_navbar.html.erb (0.2ms)
+  Rendered layouts/_flash.html.erb (0.2ms)
+  Rendered layouts/_search_form.html.erb (0.0ms)
+Completed 200 OK in 102ms (Views: 98.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-01-08 14:20:37 +0900
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE (title LIKE '%%')
+  Rendered posts/index.html.erb within layouts/application (1.8ms)
+  Rendered layouts/_navbar.html.erb (0.1ms)
+  Rendered layouts/_flash.html.erb (0.1ms)
+  Rendered layouts/_search_form.html.erb (0.0ms)
+Completed 200 OK in 101ms (Views: 93.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-01-08 14:20:38 +0900
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  Rendered posts/new.html.erb within layouts/application (1.2ms)
+  Rendered layouts/_navbar.html.erb (0.3ms)
+  Rendered layouts/_flash.html.erb (0.1ms)
+  Rendered layouts/_search_form.html.erb (0.1ms)
+Completed 200 OK in 106ms (Views: 96.6ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-01-08 14:20:42 +0900
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9Pj9ZYNLNUWntyaxviXUM9SJeJRVI99UHvj1L8qvpfXUXmVsLdCb6k3u66I7DZ8OyM4NnaiYuTPWHqOE5LgF1g==", "post"=>{"title"=>"asdfas", "content"=>"dfasdfsdf", "postimage"=>#<ActionDispatch::Http::UploadedFile:0x00007f7c464366a0 @tempfile=#<Tempfile:/tmp/RackMultipart20180108-74-11r25xb.jpg>, @original_filename="541435caecd438b23a80efbaceb5da948283f690c8dacee4de176a99acc72d43.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"post[postimage]\"; filename=\"541435caecd438b23a80efbaceb5da948283f690c8dacee4de176a99acc72d43.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "button"=>""}
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.4ms)[0m  INSERT INTO "posts" ("title", "content", "postimage", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["title", "asdfas"], ["content", "dfasdfsdf"], ["postimage", "541435caecd438b23a80efbaceb5da948283f690c8dacee4de176a99acc72d43.jpg"], ["user_id", 2], ["created_at", "2018-01-08 05:20:42.902308"], ["updated_at", "2018-01-08 05:20:42.902308"]]
+  [1m[36m (1.4ms)[0m  [1mrollback transaction[0m
+Completed 401 Unauthorized in 18821ms (ActiveRecord: 3.6ms)
+
+Excon::Error::Forbidden (Expected(200) <=> Actual(403 Forbidden)
+excon.error.response
+  :body          => "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>SignatureDoesNotMatch</Code><Message>The request signature we calculated does not match the signature you provided. Check your key and signing method.</Message><AWSAccessKeyId>AKIAJR2SHLD4G4DZ3I3Q</AWSAccessKeyId><StringToSign>AWS4-HMAC-SHA256\n20180108T052042Z\n20180108/ap-northeast-2/s3/aws4_request\ne22f5f45c9dd63a174de6a3812377c2cb08ade19d9167e59c77f37dda1743ab6</StringToSign><SignatureProvided>d9d6ee0606dc656ff642be7d63de0629d4b9307dba4b372f5c29c5f1410ca63b</SignatureProvided><StringToSignBytes>41 57 53 34 2d 48 4d 41 43 2d 53 48 41 32 35 36 0a 32 30 31 38 30 31 30 38 54 30 35 32 30 34 32 5a 0a 32 30 31 38 30 31 30 38 2f 61 70 2d 6e 6f 72 74 68 65 61 73 74 2d 32 2f 73 33 2f 61 77 73 34 5f 72 65 71 75 65 73 74 0a 65 32 32 66 35 66 34 35 63 39 64 64 36 33 61 31 37 34 64 65 36 61 33 38 31 32 33 37 37 63 32 63 62 30 38 61 64 65 31 39 64 39 31 36 37 65 35 39 63 37 37 66 33 37 64 64 61 31 37 34 33 61 62 36</StringToSignBytes><CanonicalRequest>PUT\n/uploads/post/postimage/3/541435caecd438b23a80efbaceb5da948283f690c8dacee4de176a99acc72d43.jpg\n\ncontent-length:483021\ncontent-type:image/jpeg\nhost:kurame17-fake-insta.s3-ap-northeast-2.amazonaws.com\nx-amz-acl:public-read\nx-amz-content-sha256:c4c25d18f544e308197161322db70f15c5d86fb532e2e1c009f8791671b9aedd\nx-amz-date:20180108T052042Z\n\ncontent-length;content-type;host;x-amz-acl;x-amz-content-sha256;x-amz-date\nc4c25d18f544e308197161322db70f15c5d86fb532e2e1c009f8791671b9aedd</CanonicalRequest><CanonicalRequestBytes>50 55 54 0a 2f 75 70 6c 6f 61 64 73 2f 70 6f 73 74 2f 70 6f 73 74 69 6d 61 67 65 2f 33 2f 35 34 31 34 33 35 63 61 65 63 64 34 33 38 62 32 33 61 38 30 65 66 62 61 63 65 62 35 64 61 39 34 38 32 38 33 66 36 39 30 63 38 64 61 63 65 65 34 64 65 31 37 36 61 39 39 61 63 63 37 32 64 34 33 2e 6a 70 67 0a 0a 63 6f 6e 74 65 6e 74 2d 6c 65 6e 67 74 68 3a 34 38 33 30 32 31 0a 63 6f 6e 74 65 6e 74 2d 74 79 70 65 3a 69 6d 61 67 65 2f 6a 70 65 67 0a 68 6f 73 74 3a 6b 75 72 61 6d 65 31 37 2d 66 61 6b 65 2d 69 6e 73 74 61 2e 73 33 2d 61 70 2d 6e 6f 72 74 68 65 61 73 74 2d 32 2e 61 6d 61 7a 6f 6e 61 77 73 2e 63 6f 6d 0a 78 2d 61 6d 7a 2d 61 63 6c 3a 70 75 62 6c 69 63 2d 72 65 61 64 0a 78 2d 61 6d 7a 2d 63 6f 6e 74 65 6e 74 2d 73 68 61 32 35 36 3a 63 34 63 32 35 64 31 38 66 35 34 34 65 33 30 38 31 39 37 31 36 31 33 32 32 64 62 37 30 66 31 35 63 35 64 38 36 66 62 35 33 32 65 32 65 31 63 30 30 39 66 38 37 39 31 36 37 31 62 39 61 65 64 64 0a 78 2d 61 6d 7a 2d 64 61 74 65 3a 32 30 31 38 30 31 30 38 54 30 35 32 30 34 32 5a 0a 0a 63 6f 6e 74 65 6e 74 2d 6c 65 6e 67 74 68 3b 63 6f 6e 74 65 6e 74 2d 74 79 70 65 3b 68 6f 73 74 3b 78 2d 61 6d 7a 2d 61 63 6c 3b 78 2d 61 6d 7a 2d 63 6f 6e 74 65 6e 74 2d 73 68 61 32 35 36 3b 78 2d 61 6d 7a 2d 64 61 74 65 0a 63 34 63 32 35 64 31 38 66 35 34 34 65 33 30 38 31 39 37 31 36 31 33 32 32 64 62 37 30 66 31 35 63 35 64 38 36 66 62 35 33 32 65 32 65 31 63 30 30 39 66 38 37 39 31 36 37 31 62 39 61 65 64 64</CanonicalRequestBytes><RequestId>A8CA1BC2ABC95D4A</RequestId><HostId>o6gx2fbxREw4AiDHz3cF+yO+T+bFl+T9J3alJ+yd4+WjT6biK65GcWIKdbRbv2CUG6k25CW39CE=</HostId></Error>"
+  :cookies       => [
+  ]
+  :headers       => {
+    "Connection"       => "close"
+    "Content-Type"     => "application/xml"
+    "Date"             => "Mon, 08 Jan 2018 05:20:58 GMT"
+    "Server"           => "AmazonS3"
+    "x-amz-id-2"       => "o6gx2fbxREw4AiDHz3cF+yO+T+bFl+T9J3alJ+yd4+WjT6biK65GcWIKdbRbv2CUG6k25CW39CE="
+    "x-amz-request-id" => "A8CA1BC2ABC95D4A"
+  }
+  :host          => "kurame17-fake-insta.s3-ap-northeast-2.amazonaws.com"
+  :local_address => "70.12.114.172"
+  :local_port    => 8801
+  :path          => "/uploads/post/postimage/3/541435caecd438b23a80efbaceb5da948283f690c8dacee4de176a99acc72d43.jpg"
+  :port          => 443
+  :reason_phrase => "Forbidden"
+  :remote_ip     => "52.219.56.47"
+  :status        => 403
+  :status_line   => "HTTP/1.1 403 Forbidden\r\n"
+):
+  app/controllers/posts_controller.rb:22:in `create'
+
+
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/actionpack-4.2.9/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.9ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/actionpack-4.2.9/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/actionpack-4.2.9/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/actionpack-4.2.9/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (70.5ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (66.3ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/nowem/.rbenv/versions/2.3.5/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (153.5ms)
